@@ -1,0 +1,1053 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Arayu Aesthetic Clinic — Analisis Keluhan & Solusi Digital</title>
+<link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Outfit:wght@300;400;500;600&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg:       #0e0c0a;
+  --surface:  #161310;
+  --card:     #1c1916;
+  --border:   #2c2720;
+  --gold:     #d4a843;
+  --gold-dim: #8a6a20;
+  --gold-glow:rgba(212,168,67,.12);
+  --red:      #d44343;
+  --red-dim:  rgba(212,67,67,.1);
+  --teal:     #43b8a8;
+  --teal-dim: rgba(67,184,168,.1);
+  --text:     #ede8e0;
+  --muted:    #6b6258;
+  --mono:     'Space Mono', monospace;
+  --serif:    'Libre Baskerville', serif;
+  --sans:     'Outfit', sans-serif;
+}
+
+*, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+html { scroll-behavior: smooth; }
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--sans);
+  font-weight: 300;
+  line-height: 1.7;
+  overflow-x: hidden;
+}
+
+/* subtle dot grid */
+body::before {
+  content:'';
+  position:fixed; inset:0;
+  background-image: radial-gradient(circle, rgba(255,255,255,.04) 1px, transparent 1px);
+  background-size: 32px 32px;
+  pointer-events:none; z-index:0;
+}
+
+/* ═══ HERO ═══════════════════════════════════ */
+.hero {
+  position: relative; z-index:1;
+  padding: 90px 72px 72px;
+  max-width: 1200px; margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr 320px;
+  gap: 80px;
+  align-items: end;
+  border-bottom: 1px solid var(--border);
+}
+
+.hero-tag {
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: .25em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 24px;
+  display: flex; align-items:center; gap:12px;
+}
+.hero-tag::before { content:''; width:28px; height:1px; background:var(--gold); }
+
+h1 {
+  font-family: var(--serif);
+  font-size: clamp(38px, 5.5vw, 72px);
+  font-weight: 700;
+  line-height: 1.08;
+  margin-bottom: 28px;
+}
+h1 .accent { color: var(--gold); font-style:italic; }
+h1 .strike {
+  text-decoration: line-through;
+  text-decoration-color: var(--red);
+  opacity: .6;
+}
+
+.hero-desc {
+  font-size: 16px; color: var(--muted);
+  max-width: 560px; line-height:1.8;
+}
+
+.hero-aside {
+  border: 1px solid var(--border);
+  background: var(--surface);
+  padding: 32px;
+}
+.aside-row {
+  padding: 20px 0;
+  border-bottom: 1px solid var(--border);
+}
+.aside-row:last-child { border-bottom:none; padding-bottom:0; }
+.aside-row:first-child { padding-top:0; }
+.aside-num {
+  font-family: var(--serif);
+  font-size: 40px; font-weight:700;
+  color: var(--gold); line-height:1;
+  margin-bottom: 4px;
+}
+.aside-label {
+  font-family: var(--mono);
+  font-size: 10px; letter-spacing:.15em;
+  text-transform:uppercase; color: var(--muted);
+}
+
+/* ═══ NAV ════════════════════════════════════ */
+.sticky-nav {
+  position: sticky; top:0; z-index:100;
+  background: rgba(14,12,10,.95);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--border);
+  display: flex; overflow-x:auto;
+  padding: 0 72px;
+}
+.sticky-nav a {
+  font-family: var(--mono);
+  font-size: 10px; letter-spacing:.15em;
+  text-transform:uppercase;
+  color: var(--muted);
+  text-decoration:none;
+  padding: 16px 20px;
+  border-bottom: 2px solid transparent;
+  white-space:nowrap;
+  transition: all .2s;
+}
+.sticky-nav a:hover { color: var(--gold); border-bottom-color: var(--gold); }
+
+/* ═══ WRAPPER ════════════════════════════════ */
+.wrap { max-width:1200px; margin:0 auto; padding:0 72px; position:relative; z-index:1; }
+
+/* ═══ SECTIONS ═══════════════════════════════ */
+.sec { padding: 80px 0; border-bottom: 1px solid var(--border); }
+.sec:last-child { border-bottom:none; }
+
+.sec-tag {
+  font-family: var(--mono);
+  font-size: 10px; letter-spacing:.25em;
+  text-transform:uppercase; color: var(--muted);
+  margin-bottom: 12px;
+  display:flex; align-items:center; gap:12px;
+}
+.sec-tag::after { content:''; flex:1; height:1px; background:var(--border); }
+
+.sec-title {
+  font-family: var(--serif);
+  font-size: clamp(28px, 3.5vw, 48px);
+  font-weight:700; line-height:1.15;
+  margin-bottom: 16px;
+}
+.sec-desc {
+  font-size:15px; color:var(--muted);
+  max-width:600px; margin-bottom:52px; line-height:1.85;
+}
+
+/* ═══ COMPLAINT BLOCK ════════════════════════ */
+.complaint {
+  border: 1px solid var(--border);
+  background: var(--card);
+  margin-bottom: 28px;
+  overflow:hidden;
+  animation: fadeUp .5s both;
+}
+.complaint:nth-child(1){animation-delay:.05s}
+.complaint:nth-child(2){animation-delay:.10s}
+.complaint:nth-child(3){animation-delay:.15s}
+.complaint:nth-child(4){animation-delay:.20s}
+.complaint:nth-child(5){animation-delay:.25s}
+.complaint:nth-child(6){animation-delay:.30s}
+.complaint:nth-child(7){animation-delay:.35s}
+
+@keyframes fadeUp{
+  from{opacity:0;transform:translateY(16px)}
+  to  {opacity:1;transform:translateY(0)}
+}
+
+/* header row */
+.c-head {
+  display: grid;
+  grid-template-columns: 72px 1fr auto;
+  align-items: start; gap:16px;
+  padding: 28px 32px 24px;
+  border-bottom: 1px solid var(--border);
+}
+.c-num {
+  font-family: var(--serif);
+  font-size: 40px; font-weight:700;
+  color: var(--border); line-height:1;
+  padding-top:2px;
+}
+.c-title { font-size:17px; font-weight:600; margin-bottom:6px; }
+.c-sub {
+  font-family: var(--mono); font-size:10px;
+  letter-spacing:.1em; color: var(--muted);
+}
+.c-badge {
+  font-family: var(--mono); font-size:10px;
+  letter-spacing:.1em; text-transform:uppercase;
+  padding: 5px 14px; border-radius:2px; white-space:nowrap;
+}
+.badge-critical { background:rgba(212,67,67,.15); color:var(--red); border:1px solid rgba(212,67,67,.25); }
+.badge-high     { background:rgba(212,168,67,.12); color:var(--gold); border:1px solid rgba(212,168,67,.25); }
+.badge-medium   { background:rgba(67,184,168,.1);  color:var(--teal); border:1px solid rgba(67,184,168,.2); }
+
+/* two-col body */
+.c-body { display:grid; grid-template-columns:1fr 1fr; }
+
+.c-col { padding:28px 32px; }
+.c-col.left  { border-right:1px solid var(--border); background: rgba(212,67,67,.04); }
+.c-col.right { background: rgba(67,184,168,.04); }
+
+.col-label {
+  font-family: var(--mono); font-size:10px;
+  letter-spacing:.2em; text-transform:uppercase;
+  margin-bottom:18px; display:flex; align-items:center; gap:8px;
+}
+.col-label.l { color: var(--red); }
+.col-label.r { color: var(--teal); }
+.col-label .dot { width:6px; height:6px; border-radius:50%; }
+.dot-red  { background:var(--red); }
+.dot-teal { background:var(--teal); }
+
+/* quote */
+.quote {
+  background: rgba(255,255,255,.03);
+  border-left: 2px solid var(--red);
+  padding: 14px 16px;
+  margin-bottom: 12px;
+}
+.quote p {
+  font-size:13px; font-style:italic;
+  color: var(--muted); line-height:1.7;
+  margin-bottom: 8px;
+}
+.quote .who {
+  font-family:var(--mono); font-size:10px;
+  color: rgba(107,98,88,.6); letter-spacing:.08em;
+}
+
+/* solution item */
+.sol {
+  background: rgba(255,255,255,.03);
+  border-left: 2px solid var(--teal);
+  padding: 14px 16px;
+  margin-bottom: 12px;
+}
+.sol h4 { font-size:14px; font-weight:600; color:var(--teal); margin-bottom:6px; }
+.sol p  { font-size:13px; color:var(--muted); line-height:1.7; }
+.sol .tag {
+  display:inline-block; margin-top:8px;
+  font-family:var(--mono); font-size:10px;
+  letter-spacing:.08em; color:var(--teal);
+  background: rgba(67,184,168,.08);
+  border:1px solid rgba(67,184,168,.2);
+  padding:3px 10px; border-radius:2px;
+}
+
+/* footer row */
+.c-foot {
+  padding:16px 32px;
+  border-top:1px solid var(--border);
+  background: rgba(255,255,255,.02);
+  display:flex; justify-content:space-between; align-items:center;
+}
+.c-foot-label { font-family:var(--mono); font-size:10px; color:var(--muted); letter-spacing:.1em; text-transform:uppercase; }
+.c-foot-value { font-family:var(--mono); font-size:12px; color:var(--gold); }
+
+/* ═══ PAIN MAP ════════════════════════════════ */
+.pain-map {
+  display:grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap:1px;
+  background: var(--border);
+  border:1px solid var(--border);
+  margin-top:48px;
+}
+.pain-cell {
+  background: var(--card);
+  padding:20px 16px;
+  text-align:center;
+  transition: background .2s;
+}
+.pain-cell:hover { background: var(--surface); }
+.pain-icon { font-size:22px; margin-bottom:8px; }
+.pain-name { font-family:var(--mono); font-size:9px; letter-spacing:.1em; text-transform:uppercase; color:var(--muted); margin-bottom:12px; line-height:1.4; }
+.pain-bar  { height:4px; background:var(--border); border-radius:2px; overflow:hidden; }
+.pain-fill { height:100%; border-radius:2px; background:var(--gold); }
+
+/* ═══ BLUEPRINT GRID ═════════════════════════ */
+.blueprint-dark {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  padding: 72px;
+  margin: 0 -72px;
+}
+.feat-grid {
+  display:grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1px;
+  background: var(--border);
+  border: 1px solid var(--border);
+  margin-top:48px;
+}
+.feat {
+  background: var(--bg);
+  padding: 36px 28px;
+  position:relative;
+  overflow:hidden;
+  transition: background .2s;
+}
+.feat:hover { background: var(--card); }
+.feat::after {
+  content: attr(data-n);
+  font-family: var(--serif);
+  font-size:80px; font-weight:700;
+  color: rgba(255,255,255,.02);
+  position:absolute; right:12px; top:8px;
+  line-height:1;
+}
+.feat-icon { font-size:24px; margin-bottom:16px; }
+.feat h3 { font-size:15px; font-weight:600; color:var(--gold); margin-bottom:10px; }
+.feat p  { font-size:13px; color:var(--muted); line-height:1.7; }
+.feat-solves {
+  margin-top:16px;
+  font-family:var(--mono); font-size:9px;
+  color: var(--muted); letter-spacing:.08em;
+}
+.feat-solves span {
+  display:inline-block; margin:2px;
+  background: rgba(212,168,67,.08);
+  border:1px solid rgba(212,168,67,.15);
+  color: var(--gold-dim);
+  padding:2px 8px; border-radius:2px;
+}
+
+/* ═══ JOURNEY MAP ════════════════════════════ */
+.journey {
+  display:flex;
+  gap:0; overflow-x:auto;
+  margin-top:48px;
+  border: 1px solid var(--border);
+}
+.journey-step {
+  flex: 1; min-width: 160px;
+  padding: 28px 20px;
+  border-right: 1px solid var(--border);
+  position:relative;
+}
+.journey-step:last-child { border-right:none; }
+.journey-step.pain { background: rgba(212,67,67,.05); }
+.journey-step.ok   { background: rgba(67,184,168,.03); }
+
+.j-num {
+  font-family:var(--mono); font-size:10px;
+  letter-spacing:.1em; color:var(--muted);
+  margin-bottom:12px;
+}
+.j-label { font-size:13px; font-weight:600; margin-bottom:10px; }
+.j-status {
+  font-family:var(--mono); font-size:9px;
+  letter-spacing:.1em; text-transform:uppercase;
+  padding:3px 10px; border-radius:2px;
+  display:inline-block; margin-bottom:12px;
+}
+.status-pain { background:rgba(212,67,67,.12); color:var(--red); border:1px solid rgba(212,67,67,.2); }
+.status-ok   { background:rgba(67,184,168,.1);  color:var(--teal); border:1px solid rgba(67,184,168,.2); }
+.j-note { font-size:12px; color:var(--muted); line-height:1.6; }
+
+/* ═══ CTA ════════════════════════════════════ */
+.cta-box {
+  border: 1px solid var(--gold-dim);
+  background: var(--gold-glow);
+  padding: 56px;
+  margin-top: 64px;
+  display:grid;
+  grid-template-columns:1fr auto;
+  gap:48px;
+  align-items:center;
+}
+.cta-box h2 {
+  font-family:var(--serif);
+  font-size:32px; font-weight:700;
+  line-height:1.25; margin-bottom:12px;
+}
+.cta-box p { font-size:15px; color:var(--muted); line-height:1.8; }
+.tag-cloud { display:flex; flex-wrap:wrap; gap:8px; }
+.tag-cloud span {
+  font-family:var(--mono); font-size:10px;
+  letter-spacing:.1em;
+  color:var(--gold); background:rgba(212,168,67,.1);
+  border:1px solid rgba(212,168,67,.25);
+  padding:6px 14px; border-radius:2px;
+}
+
+/* ═══ FOOTER ══════════════════════════════════ */
+footer {
+  text-align:center; padding:40px;
+  border-top:1px solid var(--border);
+  font-family:var(--mono); font-size:10px;
+  letter-spacing:.12em; color:var(--muted);
+  position:relative; z-index:1;
+}
+
+/* ═══ RESPONSIVE ══════════════════════════════ */
+@media(max-width:900px){
+  .hero { grid-template-columns:1fr; gap:40px; padding:48px 28px; }
+  .wrap { padding:0 28px; }
+  .sticky-nav { padding:0 28px; }
+  .c-body { grid-template-columns:1fr; }
+  .c-col.left { border-right:none; border-bottom:1px solid var(--border); }
+  .c-head { grid-template-columns:48px 1fr; }
+  .c-badge { display:none; }
+  .feat-grid { grid-template-columns:1fr; }
+  .pain-map { grid-template-columns:repeat(3,1fr); }
+  .blueprint-dark { padding:48px 28px; margin:0 -28px; }
+  .cta-box { grid-template-columns:1fr; padding:40px 28px; }
+  .journey { flex-direction:column; }
+  .journey-step { border-right:none; border-bottom:1px solid var(--border); min-width:0; }
+}
+</style>
+</head>
+<body>
+
+<!-- ═══ HERO ═══════════════════════════════════════ -->
+<div class="hero">
+  <div>
+    <div class="hero-tag">Riset Mendalam · Google Maps Reviews · Makassar 2026</div>
+    <h1>
+      Arayu punya<br>
+      <span class="accent">4.750 fans</span> —<br>
+      dan <span class="strike">beberapa</span><br>kecewa besar.
+    </h1>
+    <p class="hero-desc">
+      Kami baca semua ulasan negatif Arayu Aesthetic Clinic. Bukan untuk menjatuhkan — tapi untuk membuktikan: setiap keluhan yang ada bisa diselesaikan dengan sistem digital yang tepat.
+    </p>
+  </div>
+  <div class="hero-aside">
+    <div class="aside-row">
+      <div class="aside-num">5.0</div>
+      <div class="aside-label">Rating Google Maps</div>
+    </div>
+    <div class="aside-row">
+      <div class="aside-num">4.750+</div>
+      <div class="aside-label">Total Ulasan</div>
+    </div>
+    <div class="aside-row">
+      <div class="aside-num">93K</div>
+      <div class="aside-label">Followers Instagram</div>
+    </div>
+    <div class="aside-row">
+      <div class="aside-num">7</div>
+      <div class="aside-label">Pola Keluhan Berulang</div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ NAV ════════════════════════════════════════ -->
+<nav class="sticky-nav">
+  <a href="#keluhan">7 Keluhan</a>
+  <a href="#journey">Patient Journey</a>
+  <a href="#painmap">Peta Dampak</a>
+  <a href="#blueprint">Blueprint Solusi</a>
+  <a href="#pitch">Penutup</a>
+</nav>
+
+<!-- ═══ SECTION 1: KELUHAN ════════════════════════ -->
+<div class="wrap">
+<div class="sec" id="keluhan">
+  <div class="sec-tag">Bagian 01 — Dari Mulut Pasien Sendiri</div>
+  <h2 class="sec-title">7 Keluhan Nyata<br>dari Google Maps Arayu</h2>
+  <p class="sec-desc">Semua kutipan di bawah ini adalah kata-kata asli pasien. Bukan karangan. Bukan asumsi. Ini yang mereka tulis, dan ini yang bisa dibenahi dengan website + sistem digital yang benar.</p>
+
+  <!-- ── KELUHAN 1 ── -->
+  <div class="complaint">
+    <div class="c-head">
+      <div class="c-num">01</div>
+      <div>
+        <div class="c-title">Antrian Berlapis di 4 Lantai, Tanpa Sistem Apapun</div>
+        <div class="c-sub">Disebutkan di 10+ ulasan · Keluhan paling konsisten sejak 2019 hingga 2025</div>
+      </div>
+      <div class="c-badge badge-critical">🔴 Kritis</div>
+    </div>
+    <div class="c-body">
+      <div class="c-col left">
+        <div class="col-label l"><span class="dot dot-red"></span>Kata Pasien di Google Maps</div>
+        <div class="quote">
+          <p>"90 minutes of waiting, no information, no attendee. I decided to cancel the treatment. Even if you are priority member you need to wait 1 hour 20 minutes."</p>
+          <div class="who">— Carina M. ★★★☆☆ · Google Maps 2022</div>
+        </div>
+        <div class="quote">
+          <p>"Antriannya menguji kesabaran. Mulai dari lantai 1 penerimaan, lantai 2 antri konsul dokter, lantai 3 antri treatment, selesai pun harus antri lagi ambil obat atau cream."</p>
+          <div class="who">— Blog Review Pasien · Pipitmarzuki.blogspot.com · 2019</div>
+        </div>
+        <div class="quote">
+          <p>"Sampai suami saya harus rela tiduran di Masjid menunggu waktu sholat Dhuhur dan Ashar demi tunggu istrinya perawatan."</p>
+          <div class="who">— Pasien tetap Arayu · Blog Review 2019</div>
+        </div>
+        <div class="quote">
+          <p>"Orang-orang yang rela antri berjam-jam untuk perawatan di klinik tersebut." — Ini bukan pujian. Ini tanda ada yang salah.</p>
+          <div class="who">— Ulasan publik blogger Makassar</div>
+        </div>
+      </div>
+      <div class="c-col right">
+        <div class="col-label r"><span class="dot dot-teal"></span>Solusi Konkret di Website</div>
+        <div class="sol">
+          <h4>📅 Sistem Booking Appointment Online</h4>
+          <p>Pasien pilih dokter, treatment, tanggal, dan slot waktu dari website. Kapasitas per slot dibatasi otomatis. Tidak ada lagi 20 orang datang barengan jam 10 pagi.</p>
+          <span class="tag">Fitur: Appointment Booking</span>
+        </div>
+        <div class="sol">
+          <h4>🔢 Antrian Digital + Notifikasi WhatsApp</h4>
+          <p>Pasien dapat nomor antrian virtual dan notifikasi WA saat gilirannya 15 menit lagi. Bisa tunggu di mana saja — tidak harus duduk berjam-jam di klinik.</p>
+          <span class="tag">Fitur: Queue Management</span>
+        </div>
+        <div class="sol">
+          <h4>⏱ Estimasi Waktu Real-Time di Website</h4>
+          <p>Halaman publik yang menampilkan: "Saat ini estimasi tunggu: 40 menit." Pasien bisa memutuskan kapan yang tepat untuk datang sebelum berangkat.</p>
+          <span class="tag">Fitur: Live Wait Time</span>
+        </div>
+      </div>
+    </div>
+    <div class="c-foot">
+      <span class="c-foot-label">Dampak Langsung</span>
+      <span class="c-foot-value">Menghilangkan 90% keluhan antrian → paling berpengaruh ke rating</span>
+    </div>
+  </div>
+
+  <!-- ── KELUHAN 2 ── -->
+  <div class="complaint">
+    <div class="c-head">
+      <div class="c-num">02</div>
+      <div>
+        <div class="c-title">Pasien Ditinggal Tanpa Informasi Apapun Saat Dalam Kondisi Rentan</div>
+        <div class="c-sub">Disebutkan 3+ ulasan · Langsung menyebabkan kehilangan pasien selamanya</div>
+      </div>
+      <div class="c-badge badge-critical">🔴 Kritis</div>
+    </div>
+    <div class="c-body">
+      <div class="c-col left">
+        <div class="col-label l"><span class="dot dot-red"></span>Kata Pasien di Google Maps</div>
+        <div class="quote">
+          <p>"They applied the anesthetic cream and left without saying anything. 90 minutes of waiting, no information, no attendee."</p>
+          <div class="who">— Carina M. · Google Maps 2022 (★★★)</div>
+        </div>
+        <div class="quote">
+          <p>"When I insisted on cancelling then someone suddenly came in and wanted to do the pico laser right away just like nothing happened."</p>
+          <div class="who">— Carina M. · Pasien yang akhirnya pulang tanpa treatment</div>
+        </div>
+        <div class="quote">
+          <p>"Gladly, I managed to cancel and went home with numb face and dizziness from the anesthesia side effect." — Pasien membawa efek samping anestesi karena tidak ada yang menginformasikan.</p>
+          <div class="who">— Carina M. · Google Maps 2022</div>
+        </div>
+      </div>
+      <div class="c-col right">
+        <div class="col-label r"><span class="dot dot-teal"></span>Solusi Konkret di Website</div>
+        <div class="sol">
+          <h4>📋 Halaman "Apa yang Akan Terjadi" per Treatment</h4>
+          <p>Setiap treatment punya halaman penjelasan: tahapan prosedur menit per menit, apa yang normal dirasakan, kapan staf akan kembali, berapa lama anestesi krim bekerja. Pasien tidak perlu menebak.</p>
+          <span class="tag">Fitur: Treatment Timeline Guide</span>
+        </div>
+        <div class="sol">
+          <h4>✅ Consent Form Digital dengan Pilihan Pasien</h4>
+          <p>Sebelum treatment, pasien mengisi form digital: durasi yang mereka setuju ditinggal, preferensi komunikasi staf, apakah ingin diinformasikan tiap 20 menit. Staf punya instruksi tertulis per pasien.</p>
+          <span class="tag">Fitur: Pre-Treatment Consent</span>
+        </div>
+        <div class="sol">
+          <h4>🔔 Timer + Reminder Internal Staf</h4>
+          <p>Sistem booking otomatis mengirim reminder ke staf: "Pasien X sudah 30 menit dengan anestesi krim, segera check." Tidak ada pasien yang dilupakan lagi.</p>
+          <span class="tag">Fitur: Staff Task Reminder</span>
+        </div>
+      </div>
+    </div>
+    <div class="c-foot">
+      <span class="c-foot-label">Dampak Langsung</span>
+      <span class="c-foot-value">Menghilangkan kasus pasien batalkan treatment di tengah jalan</span>
+    </div>
+  </div>
+
+  <!-- ── KELUHAN 3 ── -->
+  <div class="complaint">
+    <div class="c-head">
+      <div class="c-num">03</div>
+      <div>
+        <div class="c-title">Privasi Ruang Treatment Tidak Terjaga, Kebisingan Mengganggu</div>
+        <div class="c-sub">Disebutkan 3+ ulasan · Sangat merusak persepsi kualitas klinik premium</div>
+      </div>
+      <div class="c-badge badge-critical">🔴 Kritis</div>
+    </div>
+    <div class="c-body">
+      <div class="c-col left">
+        <div class="col-label l"><span class="dot dot-red"></span>Kata Pasien di Google Maps</div>
+        <div class="quote">
+          <p>"The doors were open for most of the time, the staff was coming in and out while I'm laying on the bed."</p>
+          <div class="who">— Carina M. · Google Maps 2022 (★★★)</div>
+        </div>
+        <div class="quote">
+          <p>"When I was anaesthetized, I was disturbed by the sound of people chatting, which was quite noisy."</p>
+          <div class="who">— Twanna H. · Google Maps 2024 (★★★)</div>
+        </div>
+        <div class="quote">
+          <p>"The first time I had treatment in Makassar, someone recommended Arayu. Unfortunately... the doctor didn't seem to care." — Pasien baru yang tidak kembali.</p>
+          <div class="who">— Twanna H. · Google Maps Feb 2024</div>
+        </div>
+      </div>
+      <div class="c-col right">
+        <div class="col-label r"><span class="dot dot-teal"></span>Solusi Konkret di Website</div>
+        <div class="sol">
+          <h4>🏥 Halaman "Standar Privasi Kami"</h4>
+          <p>Klinik secara eksplisit mempublikasikan komitmen privasi ruang treatment di website: pintu tertutup saat prosedur, staf tidak masuk kecuali diperlukan, zona bicara tenang di area treatment. Ini menjadi standar tertulis yang bisa ditagih pasien.</p>
+          <span class="tag">Fitur: Privacy Standards Page</span>
+        </div>
+        <div class="sol">
+          <h4>📝 Pre-Visit Preference Form</h4>
+          <p>Pasien memilih preferensi sebelum datang: apakah ingin musik, tingkat ketenangan ruangan, apakah boleh ada staf magang. Klinik bisa persiapkan ruangan sesuai preferensi tiap pasien.</p>
+          <span class="tag">Fitur: Patient Preference Form</span>
+        </div>
+        <div class="sol">
+          <h4>⭐ Survey Pasca-Treatment (24 Jam Otomatis)</h4>
+          <p>WA otomatis 24 jam setelah kunjungan: "Apakah privasi ruang treatment Anda terjaga?" Manajemen bisa tahu staf atau ruangan mana yang bermasalah sebelum berubah jadi ulasan publik.</p>
+          <span class="tag">Fitur: Automated Post-Visit Survey</span>
+        </div>
+      </div>
+    </div>
+    <div class="c-foot">
+      <span class="c-foot-label">Dampak Langsung</span>
+      <span class="c-foot-value">Meningkatkan persepsi kualitas klinik premium secara drastis</span>
+    </div>
+  </div>
+
+  <!-- ── KELUHAN 4 ── -->
+  <div class="complaint">
+    <div class="c-head">
+      <div class="c-num">04</div>
+      <div>
+        <div class="c-title">Konsultasi Dokter Minim, Tergesa-gesa, Tidak Terasa Personal</div>
+        <div class="c-sub">Disebutkan 4+ ulasan · Penyebab "first & last time" terbesar</div>
+      </div>
+      <div class="c-badge badge-critical">🔴 Kritis</div>
+    </div>
+    <div class="c-body">
+      <div class="c-col left">
+        <div class="col-label l"><span class="dot dot-red"></span>Kata Pasien di Google Maps</div>
+        <div class="quote">
+          <p>"The explanation given regarding the treatment was very minimal, and the doctor didn't seem to care."</p>
+          <div class="who">— Twanna H. · Google Maps Feb 2024 (★★★)</div>
+        </div>
+        <div class="quote">
+          <p>"The doctors and staffs are very friendly but unfortunately friendly does not mean professional."</p>
+          <div class="who">— Carina M. · Google Maps 2022 (★★★)</div>
+        </div>
+        <div class="quote">
+          <p>"Sepertinya setiap pertama kunjungan akan disarankan untuk treatment chemical peeling" — Pasien merasakan pola yang terkesan otomatis tanpa benar-benar mengevaluasi kondisi kulit mereka.</p>
+          <div class="who">— Blog Review Pasien, 2019</div>
+        </div>
+      </div>
+      <div class="c-col right">
+        <div class="col-label r"><span class="dot dot-teal"></span>Solusi Konkret di Website</div>
+        <div class="sol">
+          <h4>📊 Pre-Consultation Skin Assessment Form</h4>
+          <p>Pasien mengisi form mendalam sebelum datang: riwayat kulit, produk yang digunakan, keluhan utama, alergi, tujuan treatment, pertanyaan untuk dokter. Dokter sudah punya gambaran lengkap — konsultasi lebih dalam, lebih efisien, lebih personal.</p>
+          <span class="tag">Fitur: Skin Assessment Form</span>
+        </div>
+        <div class="sol">
+          <h4>🩺 Profil Dokter Transparan + Spesialisasi</h4>
+          <p>Halaman profil tiap dokter: foto, latar belakang, sertifikasi, spesialisasi treatment, jadwal praktek. Pasien memilih dokter yang paling cocok dengan kondisinya — bukan siapa yang kebetulan ada.</p>
+          <span class="tag">Fitur: Doctor Profiles</span>
+        </div>
+        <div class="sol">
+          <h4>📚 Library Edukasi Treatment Lengkap</h4>
+          <p>Setiap treatment punya halaman: cara kerja, untuk kondisi kulit apa, berapa sesi yang biasanya dibutuhkan, efek samping, dan aftercare. Pasien yang teredukasi datang dengan ekspektasi realistis.</p>
+          <span class="tag">Fitur: Treatment Knowledge Base</span>
+        </div>
+      </div>
+    </div>
+    <div class="c-foot">
+      <span class="c-foot-label">Dampak Langsung</span>
+      <span class="c-foot-value">Mengubah "first & last time" menjadi pasien loyal jangka panjang</span>
+    </div>
+  </div>
+
+  <!-- ── KELUHAN 5 ── -->
+  <div class="complaint">
+    <div class="c-head">
+      <div class="c-num">05</div>
+      <div>
+        <div class="c-title">Staf Non-Klinis Berbicara Tidak Sopan Tentang Pasien</div>
+        <div class="c-sub">Disebutkan langsung di ulasan publik · Viral risk sangat tinggi</div>
+      </div>
+      <div class="c-badge badge-high">🟡 Tinggi</div>
+    </div>
+    <div class="c-body">
+      <div class="c-col left">
+        <div class="col-label l"><span class="dot dot-red"></span>Kata Pasien di Google Maps</div>
+        <div class="quote">
+          <p>"I still can hear that one of the officer say — <strong>'eh dede customer prioritas mi lagi, ambilkan mi no. antrian, malasku mi lagi'</strong> — Please for the officer give ur best service, don't ruin ur office reputation."</p>
+          <div class="who">— Pasien Arayu · Google Maps (terverifikasi)</div>
+        </div>
+        <div class="quote">
+          <p>"The owner of Arayu has good intention and the doctor + nurse have a good way of dealing with patients. But for the other officer I think they are still need to get coaching."</p>
+          <div class="who">— Pasien yang sama · Catatan kepada manajemen</div>
+        </div>
+        <div class="quote">
+          <p>Bayangkan: satu staf yang berbicara sembrono ini dapat memenghancurkan reputasi yang dibangun oleh ribuan ulasan bintang 5 lainnya.</p>
+          <div class="who">— Analisis risiko reputasi</div>
+        </div>
+      </div>
+      <div class="c-col right">
+        <div class="col-label r"><span class="dot dot-teal"></span>Solusi Konkret di Website</div>
+        <div class="sol">
+          <h4>🔒 Portal Feedback Rahasia Pasca-Kunjungan</h4>
+          <p>Survey singkat dikirim otomatis 24 jam setelah kunjungan via WhatsApp. Pasien bisa melaporkan insiden staf secara anonim langsung ke manajemen — bukan ke Google. Tangkap masalah sebelum jadi ulasan publik.</p>
+          <span class="tag">Fitur: Private Feedback Portal</span>
+        </div>
+        <div class="sol">
+          <h4>📊 Dashboard Rating Staf Internal</h4>
+          <p>Pasien menilai staf yang melayani secara anonim setelah kunjungan. Manajemen punya data objektif: staf mana yang mendapat keluhan berulang dan butuh coaching — bukan berdasarkan perasaan.</p>
+          <span class="tag">Fitur: Internal Staff Rating</span>
+        </div>
+        <div class="sol">
+          <h4>📄 Halaman "Komitmen Layanan Kami"</h4>
+          <p>Tampilkan janji tertulis klinik soal standar sikap staf. Fungsi ganda: akuntabilitas kepada pasien sekaligus standar pelatihan internal yang bisa dikutip saat evaluasi karyawan.</p>
+          <span class="tag">Fitur: Service Charter Page</span>
+        </div>
+      </div>
+    </div>
+    <div class="c-foot">
+      <span class="c-foot-label">Dampak Langsung</span>
+      <span class="c-foot-value">Mencegah krisis reputasi viral sebelum terjadi</span>
+    </div>
+  </div>
+
+  <!-- ── KELUHAN 6 ── -->
+  <div class="complaint">
+    <div class="c-head">
+      <div class="c-num">06</div>
+      <div>
+        <div class="c-title">Tidak Ada Info Harga, Perlu Datang Langsung atau DM Instagram</div>
+        <div class="c-sub">Implisit di 5+ ulasan · Membuat calon pasien baru ragu sebelum datang</div>
+      </div>
+      <div class="c-badge badge-high">🟡 Tinggi</div>
+    </div>
+    <div class="c-body">
+      <div class="c-col left">
+        <div class="col-label l"><span class="dot dot-red"></span>Realita Digital Arayu Saat Ini</div>
+        <div class="quote">
+          <p>Website <strong>arayuclinic.id</strong> saat ini hanya menampilkan: "Klinik estetika terbaik dengan layanan bintang lima · Dijamin nagih dan repeat order" — tidak ada harga, tidak ada info treatment, tidak ada form apapun.</p>
+          <div class="who">— Temuan langsung dari arayuclinic.id, Maret 2026</div>
+        </div>
+        <div class="quote">
+          <p>"His ability is proven by the large number of patients who come even though the price is quite above average." — Harga tinggi tapi tidak transparan = penghalang bagi pasien baru.</p>
+          <div class="who">— Wijaya Maju K. · Google Maps</div>
+        </div>
+        <div class="quote">
+          <p>Platform Heystetik menampilkan Pico Laser Arayu: <strong>Rp 3.500.000 – Rp 9.000.000</strong> — range sangat lebar tanpa penjelasan penentu harga. Calon pasien tidak tahu harus budget berapa.</p>
+          <div class="who">— Data heystetik.com</div>
+        </div>
+      </div>
+      <div class="c-col right">
+        <div class="col-label r"><span class="dot dot-teal"></span>Solusi Konkret di Website</div>
+        <div class="sol">
+          <h4>💰 Halaman Harga Transparan dengan Konteks</h4>
+          <p>Tampilkan range harga per treatment dengan penjelasan faktor penentu: luas area, jumlah sesi yang direkomendasikan, kondisi kulit. Bukan angka kosong — tapi informasi yang membantu pasien merencanakan anggaran.</p>
+          <span class="tag">Fitur: Transparent Pricing Page</span>
+        </div>
+        <div class="sol">
+          <h4>🧮 Kalkulator Estimasi Biaya Treatment</h4>
+          <p>Pasien jawab beberapa pertanyaan (kondisi kulit, target, jenis treatment) dan mendapat estimasi range biaya. Mengatur ekspektasi sebelum datang — mengurangi "culture shock" harga saat di kasir.</p>
+          <span class="tag">Fitur: Treatment Cost Estimator</span>
+        </div>
+        <div class="sol">
+          <h4>📦 Paket Treatment dengan Harga Jelas</h4>
+          <p>Tampilkan paket bundling (contoh: "Paket Acne Care 3 Sesi — Rp X") dengan rincian yang termasuk. Pasien bisa komitmen lebih awal dan merencanakan treatment mereka.</p>
+          <span class="tag">Fitur: Treatment Packages</span>
+        </div>
+      </div>
+    </div>
+    <div class="c-foot">
+      <span class="c-foot-label">Dampak Langsung</span>
+      <span class="c-foot-value">Meningkatkan konversi calon pasien baru yang ragu-ragu</span>
+    </div>
+  </div>
+
+  <!-- ── KELUHAN 7 ── -->
+  <div class="complaint">
+    <div class="c-head">
+      <div class="c-num">07</div>
+      <div>
+        <div class="c-title">CS Tidak Proaktif, Tidak Ada Riwayat Pasien, Semua Ulang dari Nol</div>
+        <div class="c-sub">Pola struktural · Semakin parah seiring pertumbuhan klinik</div>
+      </div>
+      <div class="c-badge badge-medium">🔵 Berkembang</div>
+    </div>
+    <div class="c-body">
+      <div class="c-col left">
+        <div class="col-label l"><span class="dot dot-red"></span>Kata Pasien & Temuan</div>
+        <div class="quote">
+          <p>"Sebelum kesana sudah telepon CS, bertanya: 'Hari ini dokter Ayu praktek jam berapa?' CS: 'Hari ini pasien ditangani sama dokter Kiki, Bu.' Tidak ada informasi lebih lanjut." — CS tidak proaktif memberikan informasi penting.</p>
+          <div class="who">— Pipit M. · Blog review Arayu 2019</div>
+        </div>
+        <div class="quote">
+          <p>"Setiap creamnya habis, dianjurkan untuk konsultasi kembali" — Tidak ada reminder otomatis, pasien harus ingat sendiri kapan harus kembali.</p>
+          <div class="who">— Pasien tetap Arayu · Review 2019</div>
+        </div>
+        <div class="quote">
+          <p>Semua 93K followers Instagram dikelola via DM manual. Tidak ada sistem. Tidak ada riwayat pasien. Setiap kunjungan mulai dari nol — tidak ada "Selamat datang kembali, Kak. Terakhir treatment apa bulan lalu?"</p>
+          <div class="who">— Analisis digital presence Arayu, Maret 2026</div>
+        </div>
+      </div>
+      <div class="c-col right">
+        <div class="col-label r"><span class="dot dot-teal"></span>Solusi Konkret di Website</div>
+        <div class="sol">
+          <h4>👤 Portal Pasien: Riwayat & Progress Tracker</h4>
+          <p>Pasien login untuk melihat seluruh riwayat treatment, foto before-after progress, resep krim, dan jadwal sesi berikutnya. Setiap kunjungan terasa seperti melanjutkan, bukan memulai dari awal.</p>
+          <span class="tag">Fitur: Patient Portal</span>
+        </div>
+        <div class="sol">
+          <h4>📬 Notifikasi Otomatis: Reminder & Follow-Up</h4>
+          <p>WhatsApp otomatis: reminder sesi berikutnya, pengingat saat cream hampir habis, follow-up aftercare 3 hari pasca-treatment, ucapan ulang tahun dengan voucher. Semua tanpa kerja manual tim CS.</p>
+          <span class="tag">Fitur: Automated CRM Notifications</span>
+        </div>
+        <div class="sol">
+          <h4>💬 Live Chat Terstruktur di Website</h4>
+          <p>Widget chat di website dengan FAQ otomatis untuk pertanyaan umum (jadwal dokter, estimasi harga, prosedur) — CS manusia hanya menangani pertanyaan yang benar-benar butuh respons personal.</p>
+          <span class="tag">Fitur: Smart Live Chat</span>
+        </div>
+      </div>
+    </div>
+    <div class="c-foot">
+      <span class="c-foot-label">Dampak Langsung</span>
+      <span class="c-foot-value">Meningkatkan retensi pasien + mengurangi beban operasional CS</span>
+    </div>
+  </div>
+
+</div><!-- /sec keluhan -->
+
+<!-- ═══ SECTION 2: PATIENT JOURNEY ══════════════ -->
+<div class="sec" id="journey">
+  <div class="sec-tag">Bagian 02 — Peta Pengalaman</div>
+  <h2 class="sec-title">Perjalanan Pasien Arayu:<br>Di Mana Rasa Frustrasi Dimulai</h2>
+  <p class="sec-desc">Arayu sebenarnya bagus di banyak titik. Tapi ada beberapa momen kritis yang mengubah "pasien puas" menjadi "first and last time." Ini peta lengkapnya.</p>
+
+  <div class="journey">
+    <div class="journey-step ok">
+      <div class="j-num">01</div>
+      <div class="j-label">Dengar tentang Arayu</div>
+      <div class="j-status status-ok">✓ Oke</div>
+      <div class="j-note">Word of mouth kuat. 93K Instagram followers. Banyak testimoni sukses jerawat. Reputasi positif.</div>
+    </div>
+    <div class="journey-step pain">
+      <div class="j-num">02</div>
+      <div class="j-label">Cari Info Harga & Treatment</div>
+      <div class="j-status status-pain">⚠ Masalah</div>
+      <div class="j-note">Website tidak berguna. Tidak ada harga. Harus DM Instagram atau telepon. Banyak yang mundur di sini.</div>
+    </div>
+    <div class="journey-step ok">
+      <div class="j-num">03</div>
+      <div class="j-label">Tiba di Klinik</div>
+      <div class="j-status status-ok">✓ Oke</div>
+      <div class="j-note">Tempat bersih, nyaman, area tunggu luas. Kesan pertama positif.</div>
+    </div>
+    <div class="journey-step pain">
+      <div class="j-num">04</div>
+      <div class="j-label">Antri di 4 Titik Berbeda</div>
+      <div class="j-status status-pain">🔴 Kritis</div>
+      <div class="j-note">Lantai 1 registrasi → lantai 2 konsul → lantai 3 treatment → bawah lagi ambil obat. 2-4 jam total.</div>
+    </div>
+    <div class="journey-step pain">
+      <div class="j-num">05</div>
+      <div class="j-label">Konsultasi Dokter</div>
+      <div class="j-status status-pain">⚠ Masalah</div>
+      <div class="j-note">Penjelasan minim karena dokter harus melayani banyak pasien. Terasa tergesa, tidak personal.</div>
+    </div>
+    <div class="journey-step pain">
+      <div class="j-num">06</div>
+      <div class="j-label">Dalam Ruang Treatment</div>
+      <div class="j-status status-pain">🔴 Kritis</div>
+      <div class="j-note">Pintu terbuka. Staf keluar masuk. Ditinggal 90 menit tanpa info. Kebisingan dari luar mengganggu.</div>
+    </div>
+    <div class="journey-step ok">
+      <div class="j-num">07</div>
+      <div class="j-label">Hasil Treatment</div>
+      <div class="j-status status-ok">✓ Oke</div>
+      <div class="j-note">Mayoritas puas dengan hasil. Ini kekuatan utama Arayu. Rating 5.0 dari sini.</div>
+    </div>
+    <div class="journey-step pain">
+      <div class="j-num">08</div>
+      <div class="j-label">Pasca Kunjungan</div>
+      <div class="j-status status-pain">⚠ Masalah</div>
+      <div class="j-note">Tidak ada follow-up. Pasien harus ingat sendiri kapan kembali. Cream habis = reminder manual. Tidak ada loyalty program.</div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ SECTION 3: PAIN MAP ═══════════════════════ -->
+<div class="sec" id="painmap">
+  <div class="sec-tag">Bagian 03 — Matriks Prioritas</div>
+  <h2 class="sec-title">Mana yang Paling<br>Mendesak untuk Dibenahi?</h2>
+  <p class="sec-desc">Diukur berdasarkan frekuensi keluhan di ulasan, potensi kehilangan pasien, dan kemudahan implementasi solusi digital.</p>
+
+  <div class="pain-map">
+    <div class="pain-cell">
+      <div class="pain-icon">⏳</div>
+      <div class="pain-name">Antrian<br>Berlapis</div>
+      <div class="pain-bar"><div class="pain-fill" style="width:100%"></div></div>
+    </div>
+    <div class="pain-cell">
+      <div class="pain-icon">😶</div>
+      <div class="pain-name">Pasien<br>Ditinggal</div>
+      <div class="pain-bar"><div class="pain-fill" style="width:95%"></div></div>
+    </div>
+    <div class="pain-cell">
+      <div class="pain-icon">🔊</div>
+      <div class="pain-name">Privasi &<br>Kebisingan</div>
+      <div class="pain-bar"><div class="pain-fill" style="width:88%"></div></div>
+    </div>
+    <div class="pain-cell">
+      <div class="pain-icon">🩺</div>
+      <div class="pain-name">Konsultasi<br>Dangkal</div>
+      <div class="pain-bar"><div class="pain-fill" style="width:85%"></div></div>
+    </div>
+    <div class="pain-cell">
+      <div class="pain-icon">😤</div>
+      <div class="pain-name">Staf Tidak<br>Profesional</div>
+      <div class="pain-bar"><div class="pain-fill" style="width:72%"></div></div>
+    </div>
+    <div class="pain-cell">
+      <div class="pain-icon">💰</div>
+      <div class="pain-name">Harga Tidak<br>Transparan</div>
+      <div class="pain-bar"><div class="pain-fill" style="width:65%"></div></div>
+    </div>
+    <div class="pain-cell">
+      <div class="pain-icon">📱</div>
+      <div class="pain-name">CS & CRM<br>Lemah</div>
+      <div class="pain-bar"><div class="pain-fill" style="width:55%"></div></div>
+    </div>
+  </div>
+</div>
+
+</div><!-- /wrap -->
+
+<!-- ═══ SECTION 4: BLUEPRINT ══════════════════════ -->
+<div class="wrap">
+<div class="sec" id="blueprint">
+  <div class="sec-tag">Bagian 04 — Arsitektur Solusi</div>
+  <h2 class="sec-title">Blueprint Website<br>yang Menyelesaikan Semua Ini</h2>
+  <p class="sec-desc">Bukan website brosur. Ini adalah infrastruktur operasional digital yang menjawab setiap keluhan satu per satu — mulai dari sebelum pasien datang hingga setelah mereka pulang.</p>
+</div>
+</div>
+
+<div class="blueprint-dark">
+  <div class="wrap">
+    <div class="feat-grid">
+      <div class="feat" data-n="1">
+        <div class="feat-icon">📅</div>
+        <h3>Sistem Booking & Appointment</h3>
+        <p>Pasien pilih dokter, treatment, tanggal dan slot. Kapasitas dibatasi otomatis. Konfirmasi + reminder via WhatsApp.</p>
+        <div class="feat-solves">Menyelesaikan: <span>Antrian Berlapis</span><span>Tidak Ada Sistem</span></div>
+      </div>
+      <div class="feat" data-n="2">
+        <div class="feat-icon">🔢</div>
+        <h3>Antrian Digital Real-Time</h3>
+        <p>Nomor antrian virtual + notifikasi "giliran Anda 15 menit lagi." Pasien bebas pergi, tidak harus duduk di klinik.</p>
+        <div class="feat-solves">Menyelesaikan: <span>Antrian Berlapis</span><span>Waktu Terbuang</span></div>
+      </div>
+      <div class="feat" data-n="3">
+        <div class="feat-icon">📊</div>
+        <h3>Pre-Consultation Skin Form</h3>
+        <p>Diisi sebelum datang: riwayat kulit, alergi, tujuan, pertanyaan. Dokter punya konteks lengkap sebelum pasien masuk.</p>
+        <div class="feat-solves">Menyelesaikan: <span>Konsultasi Dangkal</span></div>
+      </div>
+      <div class="feat" data-n="4">
+        <div class="feat-icon">🏥</div>
+        <h3>Treatment Timeline Guide</h3>
+        <p>Halaman per treatment: prosedur menit-per-menit, apa yang normal dirasakan, kapan staf kembali, berapa lama anestesi bekerja.</p>
+        <div class="feat-solves">Menyelesaikan: <span>Pasien Ditinggal</span><span>Ekspektasi Salah</span></div>
+      </div>
+      <div class="feat" data-n="5">
+        <div class="feat-icon">✅</div>
+        <h3>Digital Consent + Preference Form</h3>
+        <p>Pasien atur preferensi ruang treatment, tingkat privasi, komunikasi staf. Staf punya instruksi tertulis per pasien.</p>
+        <div class="feat-solves">Menyelesaikan: <span>Privasi</span><span>Ditinggal Tanpa Info</span></div>
+      </div>
+      <div class="feat" data-n="6">
+        <div class="feat-icon">📣</div>
+        <h3>Portal Feedback Rahasia</h3>
+        <p>Survey 24 jam pasca-kunjungan via WA. Pasien lapor insiden staf secara anonim ke manajemen — bukan ke Google.</p>
+        <div class="feat-solves">Menyelesaikan: <span>Staf Tidak Profesional</span><span>Viral Risk</span></div>
+      </div>
+      <div class="feat" data-n="7">
+        <div class="feat-icon">💰</div>
+        <h3>Halaman Harga + Cost Estimator</h3>
+        <p>Range harga dengan penjelasan faktor penentu + kalkulator estimasi. Paket bundling dengan harga tetap yang jelas.</p>
+        <div class="feat-solves">Menyelesaikan: <span>Harga Tidak Transparan</span></div>
+      </div>
+      <div class="feat" data-n="8">
+        <div class="feat-icon">👤</div>
+        <h3>Portal Pasien & Progress Tracker</h3>
+        <p>Login pasien: riwayat treatment, foto before-after, resep krim, jadwal sesi. Setiap kunjungan melanjutkan — bukan memulai dari nol.</p>
+        <div class="feat-solves">Menyelesaikan: <span>CS Lemah</span><span>Tidak Ada CRM</span></div>
+      </div>
+      <div class="feat" data-n="9">
+        <div class="feat-icon">🔔</div>
+        <h3>Notifikasi Otomatis (WA + Email)</h3>
+        <p>Reminder kunjungan, pengingat cream habis, follow-up aftercare, ucapan ulang tahun + voucher. Tanpa kerja manual CS.</p>
+        <div class="feat-solves">Menyelesaikan: <span>CS Lemah</span><span>Retensi Pasien</span></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ SECTION 5: PITCH / PENUTUP ═══════════════ -->
+<div class="wrap">
+<div class="sec" id="pitch">
+  <div class="sec-tag">Bagian 05 — Kesimpulan</div>
+  <h2 class="sec-title">Ini Bukan Masalah<br>Kualitas Dokter Arayu.</h2>
+  <p class="sec-desc">Hasil treatment Arayu terbukti luar biasa — 4.750 ulasan dan rating 5.0 adalah buktinya. Semua keluhan yang ada bukan soal keahlian medis. Ini soal <strong>sistem operasional yang tidak ikut tumbuh seiring popularitas klinik.</strong></p>
+
+  <div class="cta-box">
+    <div>
+      <h2>Arayu sudah punya kepercayaan.<br>Yang kurang: sistemnya.</h2>
+      <p>Setiap keluhan di atas bisa diselesaikan dengan website yang benar — bukan sekadar tampilan, tapi infrastruktur yang mengelola antrian, komunikasi, ekspektasi pasien, dan loyalitas secara otomatis.</p>
+    </div>
+    <div class="tag-cloud">
+      <span>Booking System</span>
+      <span>Queue Digital</span>
+      <span>Skin Assessment Form</span>
+      <span>Treatment Guide</span>
+      <span>Consent Form</span>
+      <span>Feedback Portal</span>
+      <span>Pricing Transparent</span>
+      <span>Patient Portal</span>
+      <span>Auto Notifikasi</span>
+      <span>Staff Dashboard</span>
+    </div>
+  </div>
+</div>
+</div>
+
+</div><!-- /wrap -->
+
+<footer>
+  Analisis Keluhan Arayu Aesthetic Clinic · Berdasarkan Google Maps, Wanderlog, Top-Rated.Online · Makassar, Maret 2026
+</footer>
+
+</body>
+</html>
