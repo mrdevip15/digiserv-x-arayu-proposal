@@ -108,6 +108,13 @@
             border: 1px solid var(--border);
             border-radius: var(--r-md);
             box-shadow: var(--shadow-sm);
+            transition: transform .4s cubic-bezier(0.165, 0.84, 0.44, 1), opacity .4s;
+        }
+
+        nav.hidden {
+            transform: translateY(-100px);
+            opacity: 0;
+            pointer-events: none;
         }
 
         .nav-logo {
@@ -1481,55 +1488,7 @@
                 </div>
             </div>
 
-            <!-- ROADMAP SECTION -->
-            <div style="margin-top: 100px;">
-                <span class="section-tag">
-                    <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"
-                        stroke-linecap="round" stroke-linejoin="round" style="margin-right:6px">
-                        <path
-                            d="m12 3-1.912 5.813a2 2 0 0 1-1.275 1.275L3 12l5.813 1.912a2 2 0 0 1 1.275 1.275L12 21l1.912-5.813a2 2 0 0 1 1.275-1.275L21 12l-5.813-1.912a2 2 0 0 1-1.275-1.275L12 3Z" />
-                    </svg>
-                    STEP 03: THE JOURNEY
-                </span>
-                <h2 class="section-title">STRATEGI<br><em>IMPLEMENTASI</em></h2>
 
-                <div class="phase-list">
-                    <div class="phase-item reveal">
-                        <div class="phase-num">01</div>
-                        <div class="phase-content">
-                            <h4>Fase Fondasi & Integrasi</h4>
-                            <p>Penyatuan basis data pasien dan audit sistem reservasi untuk menghilangkan hambatan
-                                teknis utama. Memastikan infrastruktur siap untuk skala yang lebih besar.</p>
-                        </div>
-                    </div>
-                    <div class="phase-item reveal" style="transition-delay:.1s">
-                        <div class="phase-num">02</div>
-                        <div class="phase-content">
-                            <h4>Fase Otomatisasi & CRM</h4>
-                            <p>Implementasi sistem follow-up otomatis dan manajemen hubungan pelanggan (CRM) yang
-                                dirancang khusus untuk alur kerja klinik estetika.</p>
-                        </div>
-                    </div>
-                    <div class="phase-item reveal" style="transition-delay:.2s">
-                        <div class="phase-num">03</div>
-                        <div class="phase-content">
-                            <h4>Fase Premium Experience</h4>
-                            <p>Peluncuran fitur eksklusif pasien (Portal Progress) dan sistem loyalitas berbasis data
-                                untuk meningkatkan Customer Lifetime Value (CLV).</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- INVESTMENT SECTION -->
-            <div class="investment-card reveal">
-                <span class="section-tag">INVESTASI STRATEGIS</span>
-                <h2>NILAI KOLABORASI</h2>
-                <div class="inv-price">Mulai dari Rp 15.000.000,-</div>
-                <p style="color:var(--text2); max-width: 600px; margin: 0 auto;">Investasi ini dirancang untuk
-                    memberikan ROI jangka panjang melalui efisiensi biaya operasional dan peningkatan retensi pasien
-                    secara signifikan.</p>
-            </div>
         </div>
     </section>
 
@@ -1560,10 +1519,21 @@
     <script>
         // ── Progress Bar ──
         window.addEventListener('scroll', () => {
+            const nav = document.querySelector('nav');
             const bar = document.getElementById('progress');
-            const total = document.body.scrollHeight - window.innerHeight;
+            const scrollHeight = document.documentElement.scrollHeight;
+            const clientHeight = document.documentElement.clientHeight;
+            const total = scrollHeight - clientHeight;
             const current = (window.scrollY / total) * 100;
+            
             bar.style.width = current + '%';
+
+            // Hide nav at bottom (threshold 50px for better reliability)
+            if (scrollHeight - (window.scrollY + clientHeight) < 50) {
+                nav.classList.add('hidden');
+            } else {
+                nav.classList.remove('hidden');
+            }
         });
 
         // ── Reveal Animation ──
