@@ -588,6 +588,131 @@
                 grid-template-columns: 1fr
             }
         }
+
+        /* ─── DEMO MVP SHOWCASE ─── */
+        .demo-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 30px;
+            margin-top: 60px;
+        }
+
+        .demo-card {
+            background: white;
+            border-radius: var(--r-lg);
+            overflow: hidden;
+            border: 1px solid var(--border);
+            box-shadow: var(--shadow-sm);
+            transition: all .4s cubic-bezier(0.165, 0.84, 0.44, 1);
+        }
+
+        .demo-card:hover {
+            transform: translateY(-10px);
+            box-shadow: var(--shadow-lg);
+            border-color: var(--primary2);
+        }
+
+        .demo-img-w {
+            aspect-ratio: 16/10;
+            overflow: hidden;
+            background: var(--bg2);
+            position: relative;
+        }
+
+        .demo-img-w img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform .6s ease;
+        }
+
+        .demo-card:hover .demo-img-w img {
+            transform: scale(1.05);
+        }
+
+        .demo-content {
+            padding: 24px;
+        }
+
+        .demo-content h4 {
+            font-family: var(--display);
+            font-size: 18px;
+            margin-bottom: 8px;
+            color: var(--text);
+        }
+
+        .demo-content p {
+            font-size: 13px;
+            color: var(--text2);
+            line-height: 1.6;
+        }
+
+        .demo-full {
+            grid-column: 1 / -1;
+        }
+
+        @media(max-width:850px) {
+            .demo-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* ─── PHASE LIST ─── */
+        .phase-list {
+            margin-top: 60px;
+        }
+
+        .phase-item {
+            display: grid;
+            grid-template-columns: 100px 1fr;
+            padding: 40px 0;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .phase-num {
+            font-family: var(--display);
+            font-size: 48px;
+            font-weight: 700;
+            color: var(--primary2);
+            line-height: 1;
+        }
+
+        .phase-content h4 {
+            font-size: 18px;
+            font-weight: 700;
+            margin-bottom: 8px;
+            color: var(--text);
+        }
+
+        /* ─── INVESTMENT ─── */
+        .investment-card {
+            background: white;
+            border-radius: var(--r-xl);
+            padding: 60px 40px;
+            text-align: center;
+            border: 2px solid var(--primary2);
+            box-shadow: var(--shadow-lg);
+            margin-top: 60px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .investment-card::before {
+            content: '💎';
+            position: absolute;
+            top: -20px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 40px;
+        }
+
+        .inv-price {
+            font-family: var(--display);
+            font-size: clamp(32px, 5vw, 48px);
+            color: var(--primary);
+            font-weight: 700;
+            margin: 20px 0;
+        }
     </style>
 </head>
 
@@ -704,7 +829,7 @@
                 <div class="cb-head" onclick="toggleCB(this)">
                     <div class="cb-info">
                         <div class="cb-num">01</div>
-                        <div class="cb-title">Sistem Antrian & Waktu Tunggu</div>
+                        <div class="cb-title">Antrian Berlapis & Tanpa Sistem</div>
                     </div>
                     <div class="cb-badge badge-kritis">
                         <svg width="10" height="10" viewBox="0 0 24 24" fill="currentColor">
@@ -722,10 +847,7 @@
                             </svg>
                             Apa Kata Pasien?
                         </div>
-                        <div class="quote-bubble">"90 minutes of waiting, no information... Even if you are priority
-                            member you wait 1 hour 20 minutes."</div>
-                        <div class="quote-bubble">"Antriannya menguji kesabaran. Lantai 1 ke lantai 2 ke lantai 3 antri
-                            semua..."</div>
+                        <div class="quote-bubble">"90 minutes of waiting, no information, no attendee. Even if you are priority member you need to wait 1 hour 20 minutes." — Cust Arayu, 2022</div>
                     </div>
                     <div>
                         <div class="col-header" style="color:var(--secondary)">
@@ -736,18 +858,8 @@
                             Solusi Digital
                         </div>
                         <div class="sol-card">
-                            <h4>
-                                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                                    stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                    <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
-                                    <line x1="16" y1="2" x2="16" y2="6"></line>
-                                    <line x1="8" y1="2" x2="8" y2="6"></line>
-                                    <line x1="3" y1="10" x2="21" y2="10"></line>
-                                </svg>
-                                Smart Booking System
-                            </h4>
-                            <p>Sistem slot terjadwal otomatis via Web/WhatsApp. Mengurangi penumpukan fisik hingga 70%
-                                dan meningkatkan kapasitas harian.</p>
+                            <h4>Smart Booking & Digital Queue</h4>
+                            <p>Sistem slot terjadwal otomatis via Web/WhatsApp. Menghilangkan 90% keluhan antrian yang konsisten muncul sejak 2019.</p>
                         </div>
                     </div>
                 </div>
@@ -758,7 +870,7 @@
                 <div class="cb-head" onclick="toggleCB(this)">
                     <div class="cb-info">
                         <div class="cb-num">02</div>
-                        <div class="cb-title">Informasi & Pendampingan Treatment</div>
+                        <div class="cb-title">Pasien Ditinggal Tanpa Informasi</div>
                     </div>
                     <div class="cb-badge badge-kritis">
                         <svg width="10" height="10" viewBox="0 0 24 24" fill="currentColor">
@@ -776,8 +888,7 @@
                             </svg>
                             Apa Kata Pasien?
                         </div>
-                        <div class="quote-bubble">"They applied anesthetic cream and left without saying anything... I
-                            went home with numb face."</div>
+                        <div class="quote-bubble">"They applied the anesthetic cream and left without saying anything. 90 minutes of waiting, no information." — Cust Arayu, 2022</div>
                     </div>
                     <div>
                         <div class="col-header" style="color:var(--secondary)">
@@ -788,26 +899,101 @@
                             Solusi Digital
                         </div>
                         <div class="sol-card">
-                            <h4>
-                                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                                    stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                    <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
-                                </svg>
-                                Treatment Journey Guide
-                            </h4>
-                            <p>Halaman panduan interaktif yang bisa diakses pasien saat treatment (via QR), memberitahu
-                                step-by-step dan estimasi waktu selesai.</p>
+                            <h4>Treatment Timeline & Staff Timer</h4>
+                            <p>Memastikan pasien tahu setiap tahapan dan tidak merasa diabaikan saat anestesi melalui panduan digital interaktif.</p>
                         </div>
                     </div>
                 </div>
             </div>
 
-            <!-- New Issue 3 -->
+            <!-- Issue 3 -->
             <div class="complaint-box reveal">
                 <div class="cb-head" onclick="toggleCB(this)">
                     <div class="cb-info">
                         <div class="cb-num">03</div>
-                        <div class="cb-title">Konsultasi yang Kurang Informatif</div>
+                        <div class="cb-title">Privasi & Kebisingan Ruang Treatment</div>
+                    </div>
+                    <div class="cb-badge badge-kritis">
+                        <svg width="10" height="10" viewBox="0 0 24 24" fill="currentColor">
+                            <circle cx="12" cy="12" r="10" />
+                        </svg>
+                        PRIORITAS
+                    </div>
+                </div>
+                <div class="cb-body">
+                    <div>
+                        <div class="col-header" style="color:var(--primary)">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
+                            </svg>
+                            Apa Kata Pasien?
+                        </div>
+                        <div class="quote-bubble">"I was disturbed by the sound of people chatting, which was quite noisy." — Cust Arayu, Feb 2024</div>
+                    </div>
+                    <div>
+                        <div class="col-header" style="color:var(--secondary)">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                                <polyline points="20 6 9 17 4 12"></polyline>
+                            </svg>
+                            Solusi Digital
+                        </div>
+                        <div class="sol-card">
+                            <h4>Privacy Standards & Preference Form</h4>
+                            <p>Menjamin suasana tenang dan ruang tertutup sebagai standar layanan premium melalui pengaturan preferensi pasien sebelum kunjungan.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Issue 4 -->
+            <div class="complaint-box reveal">
+                <div class="cb-head" onclick="toggleCB(this)">
+                    <div class="cb-info">
+                        <div class="cb-num">04</div>
+                        <div class="cb-title">Konsultasi Minim & Tergesa-gesa</div>
+                    </div>
+                    <div class="cb-badge badge-kritis">
+                        <svg width="10" height="10" viewBox="0 0 24 24" fill="currentColor">
+                            <circle cx="12" cy="12" r="10" />
+                        </svg>
+                        PRIORITAS
+                    </div>
+                </div>
+                <div class="cb-body">
+                    <div>
+                        <div class="col-header" style="color:var(--primary)">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
+                            </svg>
+                            Apa Kata Pasien?
+                        </div>
+                        <div class="quote-bubble">"The explanation given regarding the treatment was very minimal, and the doctor didn't seem to care." — Cust Arayu, Feb 2024</div>
+                    </div>
+                    <div>
+                        <div class="col-header" style="color:var(--secondary)">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                                <polyline points="20 6 9 17 4 12"></polyline>
+                            </svg>
+                            Solusi Digital
+                        </div>
+                        <div class="sol-card">
+                            <h4>Pre-Consultation Assessment</h4>
+                            <p>Formulir riwayat kulit mendalam sebelum bertemu dokter agar konsultasi lebih efisien dan personal.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Issue 5 -->
+            <div class="complaint-box reveal">
+                <div class="cb-head" onclick="toggleCB(this)">
+                    <div class="cb-info">
+                        <div class="cb-num">05</div>
+                        <div class="cb-title">Sikap Staf Non-Klinis</div>
                     </div>
                     <div class="cb-badge badge-moderat">
                         <svg width="10" height="10" viewBox="0 0 24 24" fill="currentColor">
@@ -825,8 +1011,7 @@
                             </svg>
                             Apa Kata Pasien?
                         </div>
-                        <div class="quote-bubble">"Penjelasan dokter terlalu minim, pasien merasa tidak diperhatikan
-                            atau sekadar otomatis disarankan treatment standar."</div>
+                        <div class="quote-bubble">"eh dede customer prioritas mi lagi, ambilkan mi no. antrian, malasku mi lagi" — Cust Arayu</div>
                     </div>
                     <div>
                         <div class="col-header" style="color:var(--secondary)">
@@ -837,28 +1022,19 @@
                             Solusi Digital
                         </div>
                         <div class="sol-card">
-                            <h4>
-                                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                                    stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                    <path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2">
-                                    </path>
-                                    <rect x="8" y="2" width="8" height="4" rx="1" ry="1"></rect>
-                                </svg>
-                                Standardized Consult Brief
-                            </h4>
-                            <p>Leaflet digital via WhatsApp sebelum kunjungan berisi ekspektasi durasi & prosedur.
-                                Dokter dibantu template checklist agar penjelasan diagnosis merata.</p>
+                            <h4>Private Feedback & Staff Rating</h4>
+                            <p>Portal feedback rahasia pasca-kunjungan untuk menangkap insiden staf sebelum menjadi ulasan publik.</p>
                         </div>
                     </div>
                 </div>
             </div>
 
-            <!-- New Issue 4 -->
+            <!-- Issue 6 -->
             <div class="complaint-box reveal">
                 <div class="cb-head" onclick="toggleCB(this)">
                     <div class="cb-info">
-                        <div class="cb-num">04</div>
-                        <div class="cb-title">Digital Presence & CRM Upgrade</div>
+                        <div class="cb-num">06</div>
+                        <div class="cb-title">Transparansi Harga & Layanan</div>
                     </div>
                     <div class="cb-badge badge-moderat">
                         <svg width="10" height="10" viewBox="0 0 24 24" fill="currentColor">
@@ -874,10 +1050,9 @@
                                 stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
                                 <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
                             </svg>
-                            Kondisi Saat Ini
+                            Kondisi Digital
                         </div>
-                        <div class="quote-bubble">"Website masih sederhana, belum ada sistem loyalty terdigitalisasi.
-                            Pasien lama tidak memiliki track history yang bisa diakses sendiri."</div>
+                        <div class="quote-bubble">"Website arayuclinic.id saat ini tidak ada harga, tidak ada info treatment." — Analisis Digital, 2026</div>
                     </div>
                     <div>
                         <div class="col-header" style="color:var(--secondary)">
@@ -888,17 +1063,49 @@
                             Solusi Digital
                         </div>
                         <div class="sol-card">
-                            <h4>
-                                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                                    stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                    <path
-                                        d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z">
-                                    </path>
-                                </svg>
-                                Loyalty & SEO Optimization
-                            </h4>
-                            <p>Sistem poin digital & tier member. Optimasi SEO agar ulasan Google yang masif (4.7k+)
-                                menjadi konversi organik di pencarian Google.</p>
+                            <h4>Pricing Page & Cost Estimator</h4>
+                            <p>Menampilkan range harga transparan dan kalkulator biaya untuk mengatur ekspektasi calon pasien baru.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Issue 7 -->
+            <div class="complaint-box reveal">
+                <div class="cb-head" onclick="toggleCB(this)">
+                    <div class="cb-info">
+                        <div class="cb-num">07</div>
+                        <div class="cb-title">CS Tidak Proaktif & CRM Lemah</div>
+                    </div>
+                    <div class="cb-badge badge-moderat">
+                        <svg width="10" height="10" viewBox="0 0 24 24" fill="currentColor">
+                            <circle cx="12" cy="12" r="10" />
+                        </svg>
+                        MODERAT
+                    </div>
+                </div>
+                <div class="cb-body">
+                    <div>
+                        <div class="col-header" style="color:var(--primary)">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
+                            </svg>
+                            Analisis CRM
+                        </div>
+                        <div class="quote-bubble">"Setiap kunjungan mulai dari nol. Tidak ada riwayat pasien yang terintegrasi antara digital dan fisik."</div>
+                    </div>
+                    <div>
+                        <div class="col-header" style="color:var(--secondary)">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                                <polyline points="20 6 9 17 4 12"></polyline>
+                            </svg>
+                            Solusi Digital
+                        </div>
+                        <div class="sol-card">
+                            <h4>Patient Portal & Automated CRM</h4>
+                            <p>Membangun rekam medis digital yang bisa diakses pasien sendiri untuk memantau progress dan mendapatkan reminder otomatis.</p>
                         </div>
                     </div>
                 </div>
@@ -991,6 +1198,99 @@
                     <p>Konversi ribuan ulasan Google Maps menjadi otoritas domain yang kuat, meningkatkan traffic
                         organik untuk layanan premium.</p>
                 </div>
+            </div>
+
+            <!-- MVP SHOWCASE -->
+            <div style="margin-top: 100px;">
+                <span class="section-tag">✦ STEP 02.5: VISUAL PREVIEW</span>
+                <h2 class="section-title">VISUALISASI<br><em>SOLUSI MASA DEPAN</em></h2>
+                <p style="color:var(--text2); max-width: 600px; margin-bottom: 40px;">Rancangan antarmuka yang modern, intuitif, dan mewah — mencerminkan standar pelayanan premium Arayu Clinic.</p>
+
+                <div class="demo-grid">
+                    <div class="demo-card reveal">
+                        <div class="demo-img-w">
+                            <img src="demo-mvp/home.png" alt="Beranda Utama">
+                        </div>
+                        <div class="demo-content">
+                            <h4>Antarmuka Beranda</h4>
+                            <p>Wajah digital yang prestisius, memudahkan pasien mendapatkan info treatment.</p>
+                        </div>
+                    </div>
+                    <div class="demo-card reveal" style="transition-delay:.1s">
+                        <div class="demo-img-w">
+                            <img src="demo-mvp/booking.png" alt="Reservasi Pintar">
+                        </div>
+                        <div class="demo-content">
+                            <h4>Sistem Reservasi</h4>
+                            <p>Alur booking mandiri yang simpel, tanpa perlu menunggu balasan chat manual.</p>
+                        </div>
+                    </div>
+                    <div class="demo-card reveal" style="transition-delay:.2s">
+                        <div class="demo-img-w">
+                            <img src="demo-mvp/portal.png" alt="Portal Pasien">
+                        </div>
+                        <div class="demo-content">
+                            <h4>Eksklusif Patient Portal</h4>
+                            <p>Pasien bisa memantau journey kulit mereka dan reward poin dalam satu tempat.</p>
+                        </div>
+                    </div>
+                    <div class="demo-card reveal" style="transition-delay:.3s">
+                        <div class="demo-img-w">
+                            <img src="demo-mvp/queue.png" alt="Antrian Digital">
+                        </div>
+                        <div class="demo-content">
+                            <h4>Real-time Queue</h4>
+                            <p>Transparansi waktu tunggu yang mengurangi rasa cemas pasien saat di klinik.</p>
+                        </div>
+                    </div>
+                    <div class="demo-card demo-full reveal" style="transition-delay:.4s">
+                        <div class="demo-img-w" style="aspect-ratio: 21/9;">
+                            <img src="demo-mvp/admin.png" alt="Pusat Kendali Admin">
+                        </div>
+                        <div class="demo-content">
+                            <h4>Dashboard Admin & CRM</h4>
+                            <p>Kendali penuh manajemen untuk memantau performa klinik secara real-time dan otomasi loyalitas pasien.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ROADMAP SECTION -->
+            <div style="margin-top: 100px;">
+                <span class="section-tag">✦ STEP 03: THE JOURNEY</span>
+                <h2 class="section-title">STRATEGI<br><em>IMPLEMENTASI</em></h2>
+
+                <div class="phase-list">
+                    <div class="phase-item reveal">
+                        <div class="phase-num">01</div>
+                        <div class="phase-content">
+                            <h4>Fase Fondasi & Integrasi</h4>
+                            <p>Penyatuan basis data pasien dan audit sistem reservasi untuk menghilangkan hambatan teknis utama. Memastikan infrastruktur siap untuk skala yang lebih besar.</p>
+                        </div>
+                    </div>
+                    <div class="phase-item reveal" style="transition-delay:.1s">
+                        <div class="phase-num">02</div>
+                        <div class="phase-content">
+                            <h4>Fase Otomatisasi & CRM</h4>
+                            <p>Implementasi sistem follow-up otomatis dan manajemen hubungan pelanggan (CRM) yang dirancang khusus untuk alur kerja klinik estetika.</p>
+                        </div>
+                    </div>
+                    <div class="phase-item reveal" style="transition-delay:.2s">
+                        <div class="phase-num">03</div>
+                        <div class="phase-content">
+                            <h4>Fase Premium Experience</h4>
+                            <p>Peluncuran fitur eksklusif pasien (Portal Progress) dan sistem loyalitas berbasis data untuk meningkatkan Customer Lifetime Value (CLV).</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- INVESTMENT SECTION -->
+            <div class="investment-card reveal">
+                <span class="section-tag">INVESTASI STRATEGIS</span>
+                <h2>NILAI KOLABORASI</h2>
+                <div class="inv-price">Mulai dari Rp 15.000.000,-</div>
+                <p style="color:var(--text2); max-width: 600px; margin: 0 auto;">Investasi ini dirancang untuk memberikan ROI jangka panjang melalui efisiensi biaya operasional dan peningkatan retensi pasien secara signifikan.</p>
             </div>
         </div>
     </section>
