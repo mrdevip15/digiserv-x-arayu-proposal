@@ -393,6 +393,70 @@
         .print-btn:hover {
             transform: scale(1.05);
         }
+
+        /* Lightbox Styles */
+        .lightbox-overlay {
+            position: fixed;
+            inset: 0;
+            background: rgba(10, 9, 8, 0.95);
+            backdrop-filter: blur(20px);
+            z-index: 2000;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.4s, visibility 0.4s;
+            cursor: zoom-out;
+        }
+
+        .lightbox-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .lightbox-content {
+            max-width: 90%;
+            max-height: 90%;
+            transform: scale(0.9);
+            transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
+            border: 1px solid var(--border);
+            border-radius: 4px;
+        }
+
+        .lightbox-overlay.active .lightbox-content {
+            transform: scale(1);
+        }
+
+        .lightbox-close {
+            position: absolute;
+            top: 40px;
+            right: 40px;
+            color: var(--text);
+            font-family: var(--mono);
+            font-size: 11px;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            background: none;
+            border: none;
+            cursor: pointer;
+            padding: 10px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .lightbox-close::after {
+            content: '';
+            width: 20px;
+            height: 1px;
+            background: var(--gold);
+        }
+
+        .demo-item img {
+            cursor: zoom-in;
+        }
     </style>
 </head>
 
@@ -564,29 +628,48 @@
 
     <section class="appendix" id="appendix">
         <div class="wrap">
-            <h2 class="appendix-title">Lampiran: Analisis Mendalam</h2>
+            <h2 class="appendix-title">Apa yang customer keluhkan?</h2>
 
             <div class="analysis-block">
-                <h4>1. Fragmentasi Data & Pengalaman Terputus</h4>
-                <blockquote>"Semua 93K followers dikelola manual via DM. Tidak ada riwayat pasien. Setiap kunjungan
-                    mulai dari nol."</blockquote>
-                <p><strong>Solusi:</strong> Portal Pasien & CRM Terpadu. Menghubungkan setiap interaksi digital dengan
-                    rekam medis di klinik.</p>
+                <h4>1. Antrian Berlapis & Tanpa Sistem</h4>
+                <blockquote>"90 minutes of waiting, no information, no attendee. Even if you are priority member you need to wait 1 hour 20 minutes." — Cust Arayu, Google Maps 2022</blockquote>
+                <p><strong>Solusi:</strong> Sistem Booking & Antrian Digital. Menghilangkan 90% keluhan antrian yang konsisten muncul sejak 2019.</p>
             </div>
 
             <div class="analysis-block">
-                <h4>2. Kendala Antrian & Alur Operasional</h4>
-                <blockquote>"Antri di 4 titik berbeda. Total 2-4 jam. Pasien ditinggal tanpa informasi."</blockquote>
-                <p><strong>Solusi:</strong> Antrian Digital & Timeline Guide. Memberikan transparansi waktu dan estimasi
-                    durasi treatment kepada pasien.</p>
+                <h4>2. Pasien Ditinggal Tanpa Informasi</h4>
+                <blockquote>"They applied the anesthetic cream and left without saying anything. 90 minutes of waiting, no information." — Cust Arayu, Google Maps 2022</blockquote>
+                <p><strong>Solusi:</strong> Treatment Timeline Guide & Timer Staf. Memastikan pasien tahu setiap tahapan dan tidak merasa diabaikan saat anestesi.</p>
             </div>
 
             <div class="analysis-block">
-                <h4>3. Transparansi & Komunikasi</h4>
-                <blockquote>"Website tidak berguna. Harga tidak transparan. CS tidak proaktif memberikan informasi
-                    penting."</blockquote>
-                <p><strong>Solusi:</strong> Transparent Pricing & Smart FAQ. Mengurangi beban CS dengan menyediakan
-                    informasi yang mudah diakses dan akurat.</p>
+                <h4>3. Privasi & Kebisingan Ruang Treatment</h4>
+                <blockquote>"I was disturbed by the sound of people chatting, which was quite noisy." — Cust Arayu, Google Maps Feb 2024</blockquote>
+                <p><strong>Solusi:</strong> Standar Privasi & Patient Preference Form. Menjamin suasana tenang dan pintu tertutup untuk menjaga standar premium.</p>
+            </div>
+
+            <div class="analysis-block">
+                <h4>4. Konsultasi Minim & Tergesa-gesa</h4>
+                <blockquote>"The explanation given regarding the treatment was very minimal, and the doctor didn't seem to care." — Cust Arayu, Google Maps Feb 2024</blockquote>
+                <p><strong>Solusi:</strong> Pre-Consultation Assessment Form. Dokter punya konteks lengkap sebelum bertemu, membuat konsultasi lebih personal dan dalam.</p>
+            </div>
+
+            <div class="analysis-block">
+                <h4>5. Sikap Staf Non-Klinis</h4>
+                <blockquote>"eh dede customer prioritas mi lagi, ambilkan mi no. antrian, malasku mi lagi" — Pasien Arayu, Google Maps</blockquote>
+                <p><strong>Solusi:</strong> Private Feedback Portal & Internal Rating. Menangkap perilaku staf yang merusak reputasi sebelum menjadi ulasan publik.</p>
+            </div>
+
+            <div class="analysis-block">
+                <h4>6. Transparansi Harga & Layanan</h4>
+                <blockquote>"Website arayuclinic.id saat ini tidak ada harga, tidak ada info treatment." — Analisis Digital, Maret 2026</blockquote>
+                <p><strong>Solusi:</strong> Pricing Page & Cost Estimator. Mengurangi hambatan pasien baru yang ragu karena ketidaktahuan biaya.</p>
+            </div>
+
+            <div class="analysis-block">
+                <h4>7. CS Tidak Proaktif & CRM Lemah</h4>
+                <blockquote>"Setiap kunjungan mulai dari nol. Tidak ada riwayat pasien." — Analisis Digital, Maret 2026</blockquote>
+                <p><strong>Solusi:</strong> Patient Portal & CRM Otomatis. Membangun riwayat medis yang terintegrasi untuk retensi pasien jangka panjang.</p>
             </div>
         </div>
     </section>
@@ -594,6 +677,50 @@
     <footer class="mono">
         &copy; 2026 Arayu Aesthetic Clinic x Digiserv.ID. All Rights Reserved.
     </footer>
+
+    <!-- Lightbox Markup -->
+    <div id="lightbox" class="lightbox-overlay">
+        <button class="lightbox-close">Close</button>
+        <img class="lightbox-content" src="" alt="Zoomed image">
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const lightbox = document.getElementById('lightbox');
+            const lightboxImg = lightbox.querySelector('.lightbox-content');
+            const lightboxClose = lightbox.querySelector('.lightbox-close');
+            const demoImages = document.querySelectorAll('.demo-item img');
+
+            demoImages.forEach(img => {
+                img.addEventListener('click', () => {
+                    lightboxImg.src = img.src;
+                    lightboxImg.alt = img.alt;
+                    lightbox.classList.add('active');
+                    document.body.style.overflow = 'hidden';
+                });
+            });
+
+            const closeLightbox = () => {
+                lightbox.classList.remove('active');
+                document.body.style.overflow = '';
+                setTimeout(() => {
+                    lightboxImg.src = '';
+                }, 400);
+            };
+
+            lightbox.addEventListener('click', (e) => {
+                if (e.target === lightbox || e.target === lightboxImg || e.target === lightboxClose) {
+                    closeLightbox();
+                }
+            });
+
+            document.addEventListener('keydown', (e) => {
+                if (e.key === 'Escape' && lightbox.classList.contains('active')) {
+                    closeLightbox();
+                }
+            });
+        });
+    </script>
 
 </body>
 
